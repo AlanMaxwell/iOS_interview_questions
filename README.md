@@ -375,9 +375,9 @@ In SwiftUI, the View protocol is the fundamental building block of layout and us
 
 
 ## 25. Why Views are structures in SwiftUI?
-    structs are simpler to work with and faster than classes
-    it takes less memory (it takes only what was set, without multilevel inheritance)
-    views that don’t mutate over time
+   * structs are simpler to work with and faster than classes
+   * it takes less memory (it takes only what was set, without multilevel inheritance)
+   * views that don’t mutate over time
 
 ## 26. Is there a way to use UIKit elements in SwiftUI?
 
