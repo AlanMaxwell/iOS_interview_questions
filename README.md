@@ -65,7 +65,7 @@ println("\(x.data), \(y.data)")	// prints "42, 42"
 
 For value types you will copy the value of the variable.
 
-## 8. What's difference between Class vs Structures?
+## 8. What's difference between Class and Structure?
 
 * Structures are value types.
 * Classes are reference types.
