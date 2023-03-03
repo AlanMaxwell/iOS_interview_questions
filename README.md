@@ -5,7 +5,7 @@ I'm a software developer with N years of experience. For iOS I made some project
 
 ## 2. Can you describe some of your projects and your role in these projects?
 
-## 3. What frameworks you used in your iOS?
+## 3. What frameworks you used in your iOS projects?
 You can specify frameworks like:
 UIKit, SwiftUI, Combine, AVFramework, PushNotification, CallKit, GCD, AsyncSocket, Core Bluetooth, etc.
 
