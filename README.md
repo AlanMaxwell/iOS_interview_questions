@@ -266,7 +266,7 @@ Use this:
 ![ViewController lifecycle](https://github.com/AlanMaxwell/iOS_interview_questions/blob/main/viewControllerLifecycle.png)
 
 
-## // TODO: 8.1 Can you say what ViewController lifecycle methods are calling when you started to segue from a view (A) to another view (B), but haven't finish it?
+## // TODO: Can you say what ViewController lifecycle methods are calling when you started to segue from a view (A) to another view (B), but haven't finish it?
 
 ## 15. What architecture patterns you used?
 
