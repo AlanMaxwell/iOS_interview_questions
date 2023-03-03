@@ -371,7 +371,7 @@ imagesListSubject
 
 
 ## 24. What is a View protocol in swiftUI?
-In SwiftUI, the View protocol is the fundamental building block of layout and user interface. But withour some content it can't exist
+In SwiftUI, the View protocol is the fundamental building block of layout and user interface. But without some content it can't exist
 
 
 ## 25. Why Views are structures in SwiftUI?
