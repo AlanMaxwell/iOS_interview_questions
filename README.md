@@ -503,6 +503,12 @@ func testGetDataFromServer() {
 
 ### 2) You can mock not only network calls, you can mock entire classes using, for example, OCMock framework
 
+## 3) Apple recommends to do something like this, to mock URLSession configuration
+
+[ViewController lifecycle](https://github.com/AlanMaxwell/iOS_interview_questions/blob/main/URLSessionMock.png)
+
+https://developer.apple.com/videos/play/wwdc2018/417/
+
 
 ## 32. How do you make branches?
 For each feature create a separate branch, launch CI/CD, merge to develop. When release is coming, merge develop to master.
