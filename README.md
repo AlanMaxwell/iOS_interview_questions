@@ -505,7 +505,7 @@ func testGetDataFromServer() {
 
 ## 3) Apple recommends to do something like this, to mock URLSession configuration
 
-[ViewController lifecycle](https://github.com/AlanMaxwell/iOS_interview_questions/blob/main/URLSessionMock.png)
+![URLSessionMock](https://github.com/AlanMaxwell/iOS_interview_questions/blob/main/URLSessionMock.png)
 
 https://developer.apple.com/videos/play/wwdc2018/417/
 
