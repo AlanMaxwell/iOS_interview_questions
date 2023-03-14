@@ -44,10 +44,10 @@ a ?? 0 //5
 
 ## 7. What's difference between reference and value types? What reference and value types you know?
 
-value types:
+**Value types**:
 structs, enums, arrays, dictionaries, strings
 
-reference types:
+**Reference types**:
 classes, closures, NS types are all classes (NSString, for example)
 
 Two differences between value and reference types:  
@@ -257,11 +257,11 @@ Use this:
 
 ## 14. ViewController lifecycle
 
-    • ViewDidLoad - Called when you create the class and load from xib. Great for initial setup and one-time-only work.
-    • ViewWillAppear - Called right before your view appears, good for hiding/showing fields or any operations that you want to happen every time before the view is visible. Because you might be going back and forth between views, this will be called every time your view is about to appear on the screen.
-    • ViewDidAppear - Called after the view appears - great place to start an animations or the loading of external data from an API.
-    • ViewWillDisappear/DidDisappear - Same idea as ViewWillAppear/ViewDidAppear.
-    • ViewDidUnload/ViewDidDispose - In Objective-C, this is where you do your clean-up and release of stuff, but this is handled automatically so not much you really need to do here
+* ViewDidLoad - Called when you create the class and load from xib. Great for initial setup and one-time-only work.
+* ViewWillAppear - Called right before your view appears, good for hiding/showing fields or any operations that you want to happen every time before the view is visible. Because you might be going back and forth between views, this will be called every time your view is about to appear on the screen.
+* ViewDidAppear - Called after the view appears - great place to start an animations or the loading of external data from an API.
+* ViewWillDisappear/DidDisappear - Same idea as ViewWillAppear/ViewDidAppear.
+* ViewDidUnload/ViewDidDispose - In Objective-C, this is where you do your clean-up and release of stuff, but this is handled automatically so not much you really need to do here
 
 ![ViewController lifecycle](https://github.com/AlanMaxwell/iOS_interview_questions/blob/main/viewControllerLifecycle.png)
 
@@ -286,9 +286,9 @@ VIPER – is an architecture pattern with these parts:
 ## 17. What is MVVM?
 MVVM - Model View ViewModel
 
-Model - is the data layer
-View - is a view
-ViewModel - contains presentation logic (process data from Model to View, reacts on actions from the View and transfers these reactions to Model).
+* **Model** - is the data layer.
+* **View** - is a view.
+* **ViewModel** - contains presentation logic (process data from Model to View, reacts on actions from the View and transfers these reactions to Model).
 
 In the code tree there should be three different directories: Models, Views, ViewModels. Each of your classes should be represented separately there.
 
@@ -313,11 +313,11 @@ It means next step (the name of one company)
 In this question it's better to tell about ARC and retain cycles.
 
 Short explanation:
-ARC automatically keeps track of the number of references to an object, and when that number reaches zero, it deallocates the object
-Counter decreases after an object releases
-Any object deallocates after the counter is 0
+ARC automatically keeps track of the number of references to an object, and when that number reaches zero, it deallocates the object.
+Counter decreases after an object releases.
+Any object deallocates after the counter is 0.
 
-If two objects have a strong reference to each other – retain cycle. Use weak or unowned to avoid that
+If two objects have a strong reference to each other – retain cycle. Use weak or unowned to avoid that.
 
 (weak variables are presented as optional if to take a look on its type)
 (unowned variables are presented as usual (they can’t be nil))
@@ -503,12 +503,152 @@ func testGetDataFromServer() {
 
 ### 2) You can mock not only network calls, you can mock entire classes using, for example, OCMock framework
 
-## 3) Apple recommends to do something like this, to mock URLSession configuration
+### 3) Apple recommends to do something like this, to mock URLSession configuration
 
 ![URLSessionMock](https://github.com/AlanMaxwell/iOS_interview_questions/blob/main/URLSessionMock.png)
 
 https://developer.apple.com/videos/play/wwdc2018/417/
 
+Here is the code example of mocked HTTP request using Combine:
+
+####
+```
+import XCTest
+
+class MockURLProtocol: URLProtocol {
+    static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
+    
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+    
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+    
+    override func startLoading() {
+        guard let handler = MockURLProtocol.requestHandler else {
+            XCTFail("Received unexpected request with no handler set")
+            return
+        }
+        do {
+            let (response, data) = try handler(request)
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocol(self, didLoad: data)
+            client?.urlProtocolDidFinishLoading(self)
+        } catch {
+            client?.urlProtocol(self, didFailWithError: error)
+        }
+    }
+    
+    override func stopLoading() {
+    }
+}
+
+enum ServiceError: Error, Equatable {
+    case invalidURL
+    case noInternetConnection
+    case requestTimeout
+    case networkError
+    case statusCodeError(code: Int?)
+}
+
+final class NetworkLayerTests: XCTestCase {
+
+    var mockedUrlSession: URLSession!
+    
+    override func setUpWithError() throws {
+        //exit test if something failes
+        self.continueAfterFailure = false
+        
+        let configuration = URLSessionConfiguration.ephemeral
+        
+        //set up a mock for url session
+        configuration.protocolClasses = [MockURLProtocol.self]
+        mockedUrlSession = URLSession(configuration: configuration)
+    }
+    
+    struct UserProfile:Codable {
+        var name:String?
+    }
+    
+    class ProfileAPI {
+        let url = URL(string: "https://testURL.com/user")!
+        private var cancellable: AnyCancellable?
+        
+        // session to be used to make the API call
+        let session: URLSession
+        
+        // Make the session shared by default.
+        // In unit tests, a mock session can be injected.
+        init(urlSession: URLSession = .shared) {
+            self.session = urlSession
+        }
+        
+        // get user profile from backend
+        func getProfile(completion: @escaping (UserProfile) -> Void) {
+            cancellable = session.dataTaskPublisher(for: url)
+                .mapError { error -> ServiceError in
+                    switch error.code {
+                    case .notConnectedToInternet:
+                        return .noInternetConnection
+                    case .timedOut:
+                        return .requestTimeout
+                    default:
+                        return .networkError
+                    }
+                }
+                .tryMap { data, response in
+                    guard let httpResponse = response as? HTTPURLResponse,
+                        200..<300 ~= httpResponse.statusCode else {
+                        throw ServiceError.statusCodeError(code: (response as! HTTPURLResponse).statusCode)
+                    }
+                    return data
+                }
+                .decode(type: UserProfile.self, decoder: JSONDecoder())
+                .receive(on: RunLoop.main)
+                .catch { _ in Just(UserProfile()) }
+                .sink { user in
+                    completion(user)
+            }
+        }
+    }
+    
+    func testCase() throws {
+        
+        let example = UserProfile(name: "Some User")
+        let mockData = try JSONEncoder().encode(example)
+        
+        //set return data in mock request handler
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: URL(string: "https://someURL.com/test")!,
+                                           statusCode: 200,
+                                           httpVersion: nil,
+                                           headerFields: ["Content-Type": "application/json"])!
+            return (response, mockData)
+        }
+
+        //this is simpler example, but without http-status mocking
+//        MockURLProtocol.requestHandler = { request in
+//            return (HTTPURLResponse(), mockData)
+//        }
+        
+        // Set expectation. Used to test async code.
+        let expectation = XCTestExpectation(description: "response")
+        
+        // Make mock network request to get profile
+        // here we use the previously set mocked UrlSession
+        let profileAPI = ProfileAPI(urlSession: mockedUrlSession)
+        
+        profileAPI.getProfile { user in
+            // Test
+            XCTAssertEqual(user.name, "Some User")
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+}
+```
 
 ## 32. How do you make branches?
 For each feature create a separate branch, launch CI/CD, merge to develop. When release is coming, merge develop to master.
