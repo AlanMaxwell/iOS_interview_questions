@@ -649,21 +649,29 @@ final class NetworkLayerTests: XCTestCase {
     }
 }
 ```
+## 32. What is the role of the "final" word in the class?
+It prevents properties and functions from overriding.
 
-## 32. How do you make branches?
+## 33. What are lazy variables?
+They initialize after the first time they are calling.
+
+## 34. Pros and cons of using UIKit and SwiftUI
+
+
+## 35. How do you make branches?
 For each feature create a separate branch, launch CI/CD, merge to develop. When release is coming, merge develop to master.
 
 
-## 33. What was your biggest challenge as an iOS developer?
+## 36. What was your biggest challenge as an iOS developer?
 
 Think about it, I'm sure you can find some accomplishment that you're proud of.
 
 
-## 34. What you can bring to the company as an iOS developer?
+## 37. What can you bring to the company as an iOS developer?
 
-## 35. Did you work with the team? Describe your usual working process
+## 38. Did you work with the team? Describe your usual working process
 
-## 36. Do you have some questions about the company?
+## 39. Do you have some questions about the company?
 
 Here it's better to ask about the project if they still didn't tell that, what is the earliest iOS version in the project, what management system they use, does they provide some budget for learning purposes (for example, paid courses compensation)
 
