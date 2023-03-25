@@ -657,21 +657,45 @@ They initialize after the first time they are calling.
 
 ## 34. Pros and cons of using UIKit and SwiftUI
 
+## 35. Is there a difference between "Codable" and "Encodable & Decodable" protocol inheritance?
+No, Codable is a type alias for Encodable & Decodable
 
-## 35. How do you make branches?
+## 36. What are Encodable and Decodable protocols used for?
+
+protocol Decodable : allows to decode bytes to the type that inherits Decodable
+
+protocol Encodable : allows to represent a type as data bytes
+
+Oftenly they are used for interaction with JSON and plist.
+
+### P.S.: There could be a related question, can we rename keys during encoding/decoding?
+Yes, we can using CodingKey syntax
+```
+struct Person: Decodable {
+    var personName: String
+    
+    enum CodingKeys: String, CodingKey {
+       case personName = "name"
+    }
+}
+```
+
+## 37. What App Transport Security is used for?
+
+## 38. How do you make branches?
 For each feature create a separate branch, launch CI/CD, merge to develop. When release is coming, merge develop to master.
 
 
-## 36. What was your biggest challenge as an iOS developer?
+## 39. What was your biggest challenge as an iOS developer?
 
 Think about it, I'm sure you can find some accomplishment that you're proud of.
 
 
-## 37. What can you bring to the company as an iOS developer?
+## 40. What can you bring to the company as an iOS developer?
 
-## 38. Did you work with the team? Describe your usual working process
+## 41. Did you work with the team? Describe your usual working process
 
-## 39. Do you have some questions about the company?
+## 42. Do you have some questions about the company?
 
 Here it's better to ask about the project if they still didn't tell that, what is the earliest iOS version in the project, what management system they use, does they provide some budget for learning purposes (for example, paid courses compensation)
 
