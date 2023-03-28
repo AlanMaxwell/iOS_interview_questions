@@ -715,6 +715,9 @@ There are two ways to prevent connections blocking:
 
 
 ## 38. Hou would you explain Dependency Injection to a junior?
+Dependency Injection is an approach, when functionality of one entity depends on the other entity and the FIRST gets the SECOND as a parameter.
+
+I would provide an example of MVVM implementation, because link to ViewModel in View is a good example of Dependency Injection.
 
 ## 39. How do you make branches?
 For each feature create a separate branch, launch CI/CD, merge to develop. When release is coming, merge develop to master.
