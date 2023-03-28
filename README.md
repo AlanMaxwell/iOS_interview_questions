@@ -680,22 +680,24 @@ struct Person: Decodable {
 }
 ```
 
-## 37. What App Transport Security is used for?
+## 37. Hou would you explain App Transport Security to a junior?
 
-## 38. How do you make branches?
+## 38. Hou would you explain Dependency Injection to a junior?
+
+## 39. How do you make branches?
 For each feature create a separate branch, launch CI/CD, merge to develop. When release is coming, merge develop to master.
 
 
-## 39. What was your biggest challenge as an iOS developer?
+## 40. What was your biggest challenge as an iOS developer?
 
 Think about it, I'm sure you can find some accomplishment that you're proud of.
 
 
-## 40. What can you bring to the company as an iOS developer?
+## 41. What can you bring to the company as an iOS developer?
 
-## 41. Did you work with the team? Describe your usual working process
+## 42. Did you work with the team? Describe your usual working process
 
-## 42. Do you have some questions about the company?
+## 43. Do you have some questions about the company?
 
 Here it's better to ask about the project if they still didn't tell that, what is the earliest iOS version in the project, what management system they use, does they provide some budget for learning purposes (for example, paid courses compensation)
 
