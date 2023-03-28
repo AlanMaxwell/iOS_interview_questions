@@ -1,5 +1,5 @@
 
-#Technical
+# Technical
 
 ## 1. What frameworks you used in your iOS projects?
 You can specify frameworks like:
@@ -719,7 +719,7 @@ I would provide an example of MVVM implementation, because link to ViewModel in 
 @escaping launches after the function ends, non-escaping - just after its call.
 
 
-#Behavioural: 
+# Behavioural: 
 
 ## 1. Give me a short brief about yourself
 I'm a software developer with N years of experience. For iOS I made some projects that included BLE, SwiftUI, network protocols (if you used them), etc.
