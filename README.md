@@ -680,7 +680,39 @@ struct Person: Decodable {
 }
 ```
 
-## 37. Hou would you explain App Transport Security to a junior?
+## 37. Hou would you explain App Transport Security (ATS) to a junior?
+ATS blocks insecure URLSession connections. (Security criteria are shown here https://developer.apple.com/documentation/security/preventing_insecure_network_connections)
+
+There are two ways to prevent connections blocking:
+1) Set "Allow Arbitrary Loads" - it is not a good approach. It looks like that:
+```
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+```
+
+2) You can set the exceptions. That is the good approach. It looks like that:
+```
+<key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <false/>
+      <key>NSExceptionDomains</key>
+      <dict>
+        <key>exception.com</key>
+        <dict>
+          <key>NSIncludesSubdomains</key>
+          <true/>
+          <key>NSExceptionAllowsInsecureHTTPLoads</key>
+          <true/>
+        </dict>
+        
+      </dict>
+    </dict>
+```
+
 
 ## 38. Hou would you explain Dependency Injection to a junior?
 
