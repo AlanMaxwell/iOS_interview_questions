@@ -1,15 +1,11 @@
 
+#Technical
 
-## 1. Give me a short brief about yourself
-I'm a software developer with N years of experience. For iOS I made some projects that included BLE, SwiftUI, network protocols (if you used them), etc.
-
-## 2. Can you describe some of your projects and your role in these projects?
-
-## 3. What frameworks you used in your iOS projects?
+## 1. What frameworks you used in your iOS projects?
 You can specify frameworks like:
 UIKit, SwiftUI, Combine, AVFramework, PushNotification, CallKit, GCD, AsyncSocket, Core Bluetooth, etc.
 
-## 4. How the Optional is implemented in Swift?
+## 2. How the Optional is implemented in Swift?
 ```
 enum Optional<Wrapped>
 { 
@@ -17,11 +13,11 @@ enum Optional<Wrapped>
   case some(Wrapped) 
 }
 ```
-## 5. Is there a difference between .none and nil?
+## 3. Is there a difference between .none and nil?
 
 No
 
-## 6. Ways to unwrap optional variables
+## 4. Ways to unwrap optional variables
 ```
 var a:Int?
 
@@ -42,7 +38,7 @@ guard let s = a else { //4
 a ?? 0 //5
 ```
 
-## 7. What's difference between reference and value types? What reference and value types you know?
+## 5. What's difference between reference and value types? What reference and value types you know?
 
 **Value types**:
 structs, enums, arrays, dictionaries, strings
@@ -65,7 +61,7 @@ println("\(x.data), \(y.data)")	// prints "42, 42"
 
 For value types you will copy the value of the variable.
 
-## 8. What's difference between Class and Structure?
+## 6. What's difference between Class and Structure?
 
 * Structures are value types.
 * Classes are reference types.
@@ -79,7 +75,7 @@ For value types you will copy the value of the variable.
 * No need of mutating keyword to modify the class variable’s value.
 
 
-## 9. Do you know what copy-on-write means?
+## 7. Do you know what copy-on-write means?
 If you assign one array to another (not only array, there are other objects), then the second object will refer to the first array address until the second array is not changed
 ```
 func addressOf(_ o: UnsafeRawPointer) -> String {
@@ -98,7 +94,7 @@ array.append(6)
 addressOf(array2) // 0x6000026119f0
 ```
 
-## 10. Do you know what are SOLID principles?
+## 8. Do you know what are SOLID principles?
 
 SOLID:
 
@@ -238,24 +234,24 @@ This principle is similar with OCP is more general. The DIP is an extension of t
 Difference is that OCP is for similar functions, but DIP deals with the same input data
 
 
-## 11. What is Singleton?
+## 9. What is Singleton?
 
 The main point of Singleton is to ensure that we initialized something only once and this "something" should be available from everywhere. For example, UIApplication.shared
 
 P.S.: ServiceLocator – is a singleton with an array of some services
 
 
-## 12. How are you doing your code reviews?
+## 10. How are you doing your code reviews?
 
 The best practice said that the code review should depend on CI/CD tests, a style guide, SOLID, and some linter (a syntax checker)
 
-## 13. Application lifecycle
+## 11. Application lifecycle
 
 Use this:
 
 ![Application Lifecycle](https://github.com/AlanMaxwell/iOS_interview_questions/blob/main/appLifecycle.png)
 
-## 14. ViewController lifecycle
+## 12. ViewController lifecycle
 
 * ViewDidLoad - Called when you create the class and load from xib. Great for initial setup and one-time-only work.
 * ViewWillAppear - Called right before your view appears, good for hiding/showing fields or any operations that you want to happen every time before the view is visible. Because you might be going back and forth between views, this will be called every time your view is about to appear on the screen.
@@ -268,11 +264,11 @@ Use this:
 
 ## // TODO: Can you say what ViewController lifecycle methods are calling when you started to segue from a view (A) to another view (B), but haven't finish it?
 
-## 15. What architecture patterns you used?
+## 13. What architecture patterns you used?
 
 Better to mention MVC, MVVM, VIPER
 
-## 16. What is VIPER?
+## 14. What is VIPER?
 
 VIPER – is an architecture pattern with these parts:
 
@@ -283,7 +279,7 @@ VIPER – is an architecture pattern with these parts:
 * V – view. But with additional protocol with updating functions to call. For example, if we want to show an alert in a view, then we should ask the presenter to do that
 * I – Interactor handles business logic and data retrieval
 
-## 17. What is MVVM?
+## 15. What is MVVM?
 MVVM - Model View ViewModel
 
 * **Model** - is the data layer.
@@ -296,19 +292,19 @@ Sometimes it's wise to create an additional directory called Services, in which 
 
 ## TODO: What is MVVM-C?
 
-## 18. Who is an owner of data in MVVM?
+## 16. Who is an owner of data in MVVM?
 
 Model is the data itself.
 
-## 19. MVC MVVM differences:
+## 17. MVC MVVM differences:
 
 The main difference between MVC and MVVM is the role of the controller and view model. 
 In MVC, the Controller handles user input and updates the Model and View. In MVVM, the VIEW MODEL handles user input and updates the Model and View, and the view is responsible for displaying the data.
 
-## 20. What NS prefix means in some Swift and Objective-C classes?
+## 18. What NS prefix means in some Swift and Objective-C classes?
 It means next step (the name of one company)
 
-## 21. How memory management works in iOS? (Automatic reference counter (ARC))
+## 19. How memory management works in iOS? (Automatic reference counter (ARC))
 
 In this question it's better to tell about ARC and retain cycles.
 
@@ -325,7 +321,7 @@ If two objects have a strong reference to each other – retain cycle. Use weak 
 My advise is to watch this video from Apple:
 https://developer.apple.com/videos/play/wwdc2021/10216/
 
-## 22. What is map, flatMap, compatMap, reduce. Difference between map, flatMap, compatMap
+## 20. What is map, flatMap, compatMap, reduce. Difference between map, flatMap, compatMap
 
 ### Mathematically:
 
@@ -364,29 +360,29 @@ imagesListSubject
    }
 ```
 
-## 23. How to make a multilevel dismiss in SwiftUI? (to dismiss multiple level navigation)
+## 21. How to make a multilevel dismiss in SwiftUI? (to dismiss multiple level navigation)
 1) You can use @EnvironmentObject, because it's available in all nested views
 2) You can transfer @Binding variable from the root view to new navigation levels and if you need, just toggle this variable
 3) Use an architecture pattern in which you can just set a current view. Like VIPER, REDUX and Composable architecture
 
 
-## 24. What is a View protocol in swiftUI?
+## 22. What is a View protocol in swiftUI?
 In SwiftUI, the View protocol is the fundamental building block of layout and user interface. But without some content it can't exist
 
 
-## 25. Why Views are structures in SwiftUI?
+## 23. Why Views are structures in SwiftUI?
    * structs are simpler to work with and faster than classes
    * it takes less memory (it takes only what was set, without multilevel inheritance)
    * views that don’t mutate over time
 
-## 26. Is there a way to use UIKit elements in SwiftUI?
+## 24. Is there a way to use UIKit elements in SwiftUI?
 
 Yes. You should create a class that conforms to UIViewRepresentable and UIViewControllerRepresentable protocols.
 
 But this is a long story. If you are curious in implementation, just try to find a couple of examples.
 
 
-## 27. Redux in iOS (example of button tapping)
+## 25. Redux in iOS (example of button tapping)
 
 A simple example in which a button increments a counter.
 ```
@@ -441,13 +437,13 @@ struct ContentView: View {
 }
 ```
 
-## 27. Composable architecture
+## 26. Composable architecture
 * View sends events to Action
 * Action sends an action to a Reducer (keeps state of the app alive)
 * Reduces mutate State, sends a call to Effect (outside world), interacts with Environment (dependencies, that are helpful for testing)
 * State influence View
 
-## 28. What asynchronous functionality is available in Swift?
+## 27. What asynchronous functionality is available in Swift?
 
 * DispatchQueue
 * DispatchGroup
@@ -459,7 +455,7 @@ struct ContentView: View {
 
 A note: you should always update interface only on main thread (DispatchQueue.main), otherwise it can just stuck
 
-## 29. What HTTP methods you know?
+## 28. What HTTP methods you know?
 
 * HTTP:
 * POST: Sends data to specific server to create or update information.
@@ -470,7 +466,7 @@ A note: you should always update interface only on main thread (DispatchQueue.ma
 * DELETE: Removes information.
 
             
-## 30. How do you test network calls in Unit test?
+## 29. How do you test network calls in Unit test?
 
 ### 1)You should mock network calls.
 ```
@@ -649,18 +645,18 @@ final class NetworkLayerTests: XCTestCase {
     }
 }
 ```
-## 32. What is the role of the "final" word in the class?
+## 30. What is the role of the "final" word in the class?
 It prevents properties and functions from overriding.
 
-## 33. What are lazy variables?
+## 31. What are lazy variables?
 They initialize after the first time they are calling.
 
-## 34. Pros and cons of using UIKit and SwiftUI
+## 32. Pros and cons of using UIKit and SwiftUI
 
-## 35. Is there a difference between "Codable" and "Encodable & Decodable" protocol inheritance?
+## 33. Is there a difference between "Codable" and "Encodable & Decodable" protocol inheritance?
 No, Codable is a type alias for Encodable & Decodable
 
-## 36. What are Encodable and Decodable protocols used for?
+## 34. What are Encodable and Decodable protocols used for?
 
 protocol Decodable : allows to decode bytes to the type that inherits Decodable
 
@@ -680,7 +676,7 @@ struct Person: Decodable {
 }
 ```
 
-## 37. Hou would you explain App Transport Security (ATS) to a junior?
+## 35. Hou would you explain App Transport Security (ATS) to a junior?
 ATS blocks insecure URLSession connections. (Security criteria are shown here https://developer.apple.com/documentation/security/preventing_insecure_network_connections)
 
 There are two ways to prevent connections blocking:
@@ -714,25 +710,35 @@ There are two ways to prevent connections blocking:
 ```
 
 
-## 38. Hou would you explain Dependency Injection to a junior?
+## 36. Hou would you explain Dependency Injection to a junior?
 Dependency Injection is an approach, when functionality of one entity depends on the other entity and the FIRST gets the SECOND as a parameter.
 
 I would provide an example of MVVM implementation, because link to ViewModel in View is a good example of Dependency Injection.
 
-## 39. How do you make branches?
+## 37. What's difference between @escaping and non-escaping closures?
+@escaping launches after the function ends, non-escaping - just after its call.
+
+
+#Behavioural: 
+
+## 1. Give me a short brief about yourself
+I'm a software developer with N years of experience. For iOS I made some projects that included BLE, SwiftUI, network protocols (if you used them), etc.
+
+## 2. Can you describe some of your projects and your role in these projects?
+
+
+## 3. How do you make branches?
 For each feature create a separate branch, launch CI/CD, merge to develop. When release is coming, merge develop to master.
 
-
-## 40. What was your biggest challenge as an iOS developer?
+## 4. What was your biggest challenge as an iOS developer?
 
 Think about it, I'm sure you can find some accomplishment that you're proud of.
 
+## 5. What can you bring to the company as an iOS developer?
 
-## 41. What can you bring to the company as an iOS developer?
+## 6. Did you work with the team? Describe your usual working process
 
-## 42. Did you work with the team? Describe your usual working process
-
-## 43. Do you have some questions about the company?
+## 7. Do you have some questions about the company?
 
 Here it's better to ask about the project if they still didn't tell that, what is the earliest iOS version in the project, what management system they use, does they provide some budget for learning purposes (for example, paid courses compensation)
 
