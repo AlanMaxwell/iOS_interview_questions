@@ -3,7 +3,7 @@
 
 ## 1. What frameworks you used in your iOS projects?
 You can specify frameworks like:
-UIKit, SwiftUI, Combine, AVFramework, PushNotification, CallKit, GCD, AsyncSocket, Core Bluetooth, etc.
+UIKit, SwiftUI, Combine, AVFramework, PushNotification, CallKit, GCD, Core Bluetooth, etc.
 
 ## 2. How the Optional is implemented in Swift?
 ```
