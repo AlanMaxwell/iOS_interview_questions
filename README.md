@@ -718,6 +718,12 @@ I would provide an example of MVVM implementation, because link to ViewModel in 
 ## 37. What's difference between @escaping and non-escaping closures?
 @escaping launches after the function ends, non-escaping - just after its call.
 
+## 38. What's difference between inout parameter of the function and a usual parameter?
+
+```
+func example(_ a: Int, _ b: inout Int) {}
+```
+inout keyword allows to change the value of the parameter variable.
 
 # Behavioural: 
 
