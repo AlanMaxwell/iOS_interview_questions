@@ -90,7 +90,7 @@ addressOf(array) // 0x600002e30ac0
 var array2 = array
 addressOf(array2) // 0x600002e30ac0
 
-array.append(6)
+array2.append(6)
 addressOf(array2) // 0x6000026119f0
 ```
 
