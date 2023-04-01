@@ -725,6 +725,12 @@ func example(_ a: Int, _ b: inout Int) {}
 ```
 inout keyword allows to change the value of the parameter variable.
 
+## 39. Do classes support multilple inheritance in Swift?
+
+If to try to inherit from multiple classes, then NO. Swift classes don't support multiple inheritance.
+
+But you can inherit multiple protocols.
+
 # Behavioural: 
 
 ## 1. Give me a short brief about yourself
