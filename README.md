@@ -450,6 +450,8 @@ struct ContentView: View {
 * Operation queues
 * delegate events
 * Timer operations
+* Push Notifications
+* Calendar Operations
 * Combine publisher that is sending data
 * async/await
 
