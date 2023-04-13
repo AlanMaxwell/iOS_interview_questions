@@ -678,7 +678,50 @@ struct Person: Decodable {
 }
 ```
 
-## 35. Hou would you explain App Transport Security (ATS) to a junior?
+## 40. How to serialize a generic type?
+Two ways:
+1) Automatic: when you just inherit a type from Codable and just encode (P.S.: all class fields should conform to Encodable)
+```
+class Example<T: Codable>: Codable {
+    let data: T
+    
+    init(data: T) {
+        self.data = data
+    }
+}
+
+let example = Example(data: ["John", "Doe", "john.doe@example.com"])
+let encoder = JSONEncoder()
+let data = try encoder.encode(example)
+```
+2) Manually - create a self written encode function. If you want to use, for example, not all fields
+```
+class Response<T: Encodable>: Encodable {
+    let success: Bool
+    let data: T
+    
+    let str:String = "" //extra field, which we don't use 
+
+    
+    init(success: Bool, data: T) {
+        self.success = success
+        self.data = data
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(success, forKey: .success)
+        try container.encode(data, forKey: .data)
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case success
+        case data
+    }
+}
+```
+
+## 36. Hou would you explain App Transport Security (ATS) to a junior?
 ATS blocks insecure URLSession connections. (Security criteria are shown here https://developer.apple.com/documentation/security/preventing_insecure_network_connections)
 
 There are two ways to prevent connections blocking:
@@ -712,26 +755,32 @@ There are two ways to prevent connections blocking:
 ```
 
 
-## 36. Hou would you explain Dependency Injection to a junior?
+## 37. Hou would you explain Dependency Injection to a junior?
 Dependency Injection is an approach, when functionality of one entity depends on the other entity and the FIRST gets the SECOND as a parameter.
 
 I would provide an example of MVVM implementation, because link to ViewModel in View is a good example of Dependency Injection.
 
-## 37. What's difference between @escaping and non-escaping closures?
+## 38. What's difference between @escaping and non-escaping closures?
 @escaping launches after the function ends, non-escaping - just after its call.
 
-## 38. What's difference between inout parameter of the function and a usual parameter?
+## 39. What's difference between inout parameter of the function and a usual parameter?
 
 ```
 func example(_ a: Int, _ b: inout Int) {}
 ```
 inout keyword allows to change the value of the parameter variable.
 
-## 39. Do classes support multilple inheritance in Swift?
+## 40. Do classes support multilple inheritance in Swift?
 
 If to try to inherit from multiple classes, then NO. Swift classes don't support multiple inheritance.
 
 But you can inherit multiple protocols.
+
+## 41. In SwiftUI how to draw 1 million rows in a list?
+
+1) You can use List view element
+2) ScrollView + LazyVStack views
+
 
 # Behavioural: 
 
