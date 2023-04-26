@@ -290,21 +290,23 @@ In the code tree there should be three different directories: Models, Views, Vie
 
 Sometimes it's wise to create an additional directory called Services, in which you can put your business logic. 
 
-## TODO: What is MVVM-C?
+## 16. What is MVVM-C?
+It is MVVM with Coordinator, where Coordinator is an object (in SwiftUI it's an EnviromnentObject), that is common for all Views, that is responsible for navigation. It switches views depending on some inner variable, usually Enum.
 
-## 16. Who is an owner of data in MVVM?
+
+## 17. Who is an owner of data in MVVM?
 
 Model is the data itself.
 
-## 17. MVC MVVM differences:
+## 18. MVC MVVM differences:
 
 The main difference between MVC and MVVM is the role of the controller and view model. 
 In MVC, the Controller handles user input and updates the Model and View. In MVVM, the VIEW MODEL handles user input and updates the Model and View, and the view is responsible for displaying the data.
 
-## 18. What NS prefix means in some Swift and Objective-C classes?
+## 19. What NS prefix means in some Swift and Objective-C classes?
 It means next step (the name of one company)
 
-## 19. How memory management works in iOS? (Automatic reference counter (ARC))
+## 20. How memory management works in iOS? (Automatic reference counter (ARC))
 
 In this question it's better to tell about ARC and retain cycles.
 
@@ -321,7 +323,7 @@ If two objects have a strong reference to each other – retain cycle. Use weak 
 My advise is to watch this video from Apple:
 https://developer.apple.com/videos/play/wwdc2021/10216/
 
-## 20. What is map, flatMap, compatMap, reduce. Difference between map, flatMap, compatMap
+## 21. What is map, flatMap, compatMap, reduce. Difference between map, flatMap, compatMap
 
 ### Mathematically:
 
@@ -360,29 +362,33 @@ imagesListSubject
    }
 ```
 
-## 21. How to make a multilevel dismiss in SwiftUI? (to dismiss multiple level navigation)
+## 21. What's difference between bounds and frame in UIView?
+
+The difference in coordinate system. Bounds refers to its coordinates relative to its own space (as if the rest of your view hierarchy didn’t exist), frame refers to its coordinates relative to its parent’s space.
+
+## 22. How to make a multilevel dismiss in SwiftUI? (to dismiss multiple level navigation)
 1) You can use @EnvironmentObject, because it's available in all nested views
 2) You can transfer @Binding variable from the root view to new navigation levels and if you need, just toggle this variable
 3) Use an architecture pattern in which you can just set a current view. Like VIPER, REDUX and Composable architecture
 
 
-## 22. What is a View protocol in swiftUI?
+## 23. What is a View protocol in SwiftUI?
 In SwiftUI, the View protocol is the fundamental building block of layout and user interface. But without some content it can't exist
 
 
-## 23. Why Views are structures in SwiftUI?
+## 24. Why Views are structures in SwiftUI?
    * structs are simpler to work with and faster than classes
    * it takes less memory (it takes only what was set, without multilevel inheritance)
    * views that don’t mutate over time
 
-## 24. Is there a way to use UIKit elements in SwiftUI?
+## 25. Is there a way to use UIKit elements in SwiftUI?
 
 Yes. You should create a class that conforms to UIViewRepresentable and UIViewControllerRepresentable protocols.
 
 But this is a long story. If you are curious in implementation, just try to find a couple of examples.
 
 
-## 25. Redux in iOS (example of button tapping)
+## 26. Redux in iOS (example of button tapping)
 
 A simple example in which a button increments a counter.
 ```
@@ -437,13 +443,13 @@ struct ContentView: View {
 }
 ```
 
-## 26. Composable architecture
+## 27. Composable architecture
 * View sends events to Action
 * Action sends an action to a Reducer (keeps state of the app alive)
 * Reduces mutate State, sends a call to Effect (outside world), interacts with Environment (dependencies, that are helpful for testing)
 * State influence View
 
-## 27. What asynchronous functionality is available in Swift?
+## 28. What asynchronous functionality is available in Swift?
 
 * DispatchQueue
 * DispatchGroup
@@ -454,10 +460,40 @@ struct ContentView: View {
 * Calendar Operations
 * Combine publisher that is sending data
 * async/await
+* Tasks - that are using with async/await
+* background tasks (separate mechanism that is useful when you run tasks for an application in background). It runs not so long, but sometimes it's useful if you wake up the application in background and want to do something for this period.
 
 A note: you should always update interface only on main thread (DispatchQueue.main), otherwise it can just stuck
 
-## 28. What HTTP methods you know?
+## 29. What's difference between DispatchQueue, Operation queues, async/await?
+
+* Difference between DispatchQueue and async/await is in tasks scheduling. DispatchQueue create a separate thread for each waiting task, whereas async/await is trying to launch everything on just one thread by suspending waiting functions. So async/await reduces number of threads and the number of threads switching.
+https://developer.apple.com/videos/play/wwdc2021/10254/
+* async/await is the language feature, DispatchQueue is a framework.
+* DispatchQueue and OperationQueue are used for managing work on threads, async/await is used for writing asynchronous code in a synchronous style.
+
+
+. In DispatchQueue they are 
+
+## 30. What is a dead lock?
+
+It's when two different threads want to access to a shared resource, but they are both waiting for each other to unlock.
+
+## 31. What is a race condition?
+
+It's when two different threads write and read from a shared resource without syncronization. It leads to broked data.
+
+## 32. How to launch a group or asyncronous tasks?
+
+If the order doesn't matter, you can just use DispatchQueue.main.async (or DispatchQueue.global.async).
+
+If order matters you can use DispatchGroup or Operation Queue. But what to choose depends on a task specific: when you use Operation Queue you will not be notified when these tasks are done, but in DispatchGroup you will be. And if you use DispatchGroup you can't cancel tasks execution, but for Operation Queue you can.
+
+## 33. Can a DispatchQueue task be cancelled?
+
+No. But DispatchWorkItem can be cancelled.
+
+## 34. What HTTP methods you know?
 
 * HTTP:
 * POST: Sends data to specific server to create or update information.
@@ -468,7 +504,7 @@ A note: you should always update interface only on main thread (DispatchQueue.ma
 * DELETE: Removes information.
 
             
-## 29. How do you test network calls in Unit test?
+## 35. How do you test network calls in Unit test?
 
 ### 1)You should mock network calls.
 ```
@@ -647,18 +683,18 @@ final class NetworkLayerTests: XCTestCase {
     }
 }
 ```
-## 30. What is the role of the "final" word in the class?
+## 36. What is the role of the "final" word in the class?
 It prevents properties and functions from overriding.
 
-## 31. What are lazy variables?
+## 37. What are lazy variables?
 They initialize after the first time they are calling.
 
-## 32. Pros and cons of using UIKit and SwiftUI
+## 38. Pros and cons of using UIKit and SwiftUI
 
-## 33. Is there a difference between "Codable" and "Encodable & Decodable" protocol inheritance?
+## 39. Is there a difference between "Codable" and "Encodable & Decodable" protocol inheritance?
 No, Codable is a type alias for Encodable & Decodable
 
-## 34. What are Encodable and Decodable protocols used for?
+## 40. What are Encodable and Decodable protocols used for?
 
 protocol Decodable : allows to decode bytes to the type that inherits Decodable
 
@@ -678,7 +714,7 @@ struct Person: Decodable {
 }
 ```
 
-## 40. How to serialize a generic type?
+## 41. How to serialize a generic type?
 Two ways:
 1) Automatic: when you just inherit a type from Codable and just encode (P.S.: all class fields should conform to Encodable)
 ```
@@ -721,7 +757,7 @@ class Response<T: Encodable>: Encodable {
 }
 ```
 
-## 36. Hou would you explain App Transport Security (ATS) to a junior?
+## 42. Hou would you explain App Transport Security (ATS) to a junior?
 ATS blocks insecure URLSession connections. (Security criteria are shown here https://developer.apple.com/documentation/security/preventing_insecure_network_connections)
 
 There are two ways to prevent connections blocking:
@@ -755,28 +791,28 @@ There are two ways to prevent connections blocking:
 ```
 
 
-## 37. Hou would you explain Dependency Injection to a junior?
+## 43. Hou would you explain Dependency Injection to a junior?
 Dependency Injection is an approach, when functionality of one entity depends on the other entity and the FIRST gets the SECOND as a parameter.
 
 I would provide an example of MVVM implementation, because link to ViewModel in View is a good example of Dependency Injection.
 
-## 38. What's difference between @escaping and non-escaping closures?
+## 44. What's difference between @escaping and non-escaping closures?
 @escaping launches after the function ends, non-escaping - just after its call.
 
-## 39. What's difference between inout parameter of the function and a usual parameter?
+## 45. What's difference between inout parameter of the function and a usual parameter?
 
 ```
 func example(_ a: Int, _ b: inout Int) {}
 ```
 inout keyword allows to change the value of the parameter variable.
 
-## 40. Do classes support multilple inheritance in Swift?
+## 46. Do classes support multilple inheritance in Swift?
 
 If to try to inherit from multiple classes, then NO. Swift classes don't support multiple inheritance.
 
 But you can inherit multiple protocols.
 
-## 41. In SwiftUI how to draw 1 million rows in a list?
+## 47. In SwiftUI how to draw 1 million rows in a list?
 
 1) You can use List view element
 2) ScrollView + LazyVStack views
