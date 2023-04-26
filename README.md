@@ -291,7 +291,7 @@ In the code tree there should be three different directories: Models, Views, Vie
 Sometimes it's wise to create an additional directory called Services, in which you can put your business logic. 
 
 ## 16. What is MVVM-C?
-It is MVVM with Coordinator, where Coordinator is an object (in SwiftUI it's an EnviromnentObject), that is common for all Views, that is responsible for navigation. It switches views depending on some inner variable, usually Enum.
+It is MVVM with Coordinator, where Coordinator is an object (in SwiftUI it's an EnviromnentObject), that is common for all Views, that is responsible for navigation. It switches views depending on some observable variable, usually Enum.
 
 
 ## 17. Who is an owner of data in MVVM?
