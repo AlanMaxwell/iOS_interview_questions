@@ -2,7 +2,7 @@
 # Technical
 
 ## 1. What frameworks you used in your iOS projects?
-You can specify frameworks like:
+You can specify frameworks like:Cancel changes
 UIKit, SwiftUI, Combine, AVFramework, PushNotification, CallKit, GCD, Core Bluetooth, etc.
 
 ## 2. How the Optional is implemented in Swift?
