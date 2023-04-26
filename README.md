@@ -472,8 +472,8 @@ https://developer.apple.com/videos/play/wwdc2021/10254/
 * async/await is the language feature, DispatchQueue is a framework.
 * DispatchQueue and OperationQueue are used for managing work on threads, async/await is used for writing asynchronous code in a synchronous style.
 
+* DispatchQueue and OperationQueue difference - you can't cancel DispatchQueue tasks. So, DispatchQueue are better for short tasks that should have minimum performance and memory, OperationQueue are more suitable for long-running operations that may need to be cancelled or have complex dependencies
 
-. In DispatchQueue they are 
 
 ## 30. What is a dead lock?
 
@@ -487,7 +487,7 @@ It's when two different threads write and read from a shared resource without sy
 
 If the order doesn't matter, you can just use DispatchQueue.main.async (or DispatchQueue.global.async).
 
-If order matters you can use DispatchGroup or Operation Queue. But what to choose depends on a task specific: when you use Operation Queue you will not be notified when these tasks are done, but in DispatchGroup you will be. And if you use DispatchGroup you can't cancel tasks execution, but for Operation Queue you can.
+If order matters you can use DispatchGroup with DispatchQueue or Operation Queue. But what to choose depends on a task specific: when you use Operation Queue you will not be notified when these tasks are done, but in DispatchGroup you will be. And if you use DispatchGroup you can't cancel tasks execution, but for Operation Queue you can.
 
 ## 33. Can a DispatchQueue task be cancelled?
 
