@@ -806,17 +806,46 @@ func example(_ a: Int, _ b: inout Int) {}
 ```
 inout keyword allows to change the value of the parameter variable.
 
-## 46. Do classes support multilple inheritance in Swift?
+## 46. In SwiftUI how to draw 1 million rows in a list?
+
+1) You can use List view element
+2) ScrollView + LazyVStack views
+
+
+## 47. Do classes support multilple inheritance in Swift?
 
 If to try to inherit from multiple classes, then NO. Swift classes don't support multiple inheritance.
 
 But you can inherit multiple protocols.
 
-## 47. In SwiftUI how to draw 1 million rows in a list?
+## 48. How to prevent a class inheritance?
 
-1) You can use List view element
-2) ScrollView + LazyVStack views
+Using final keyword, like:
+```
+final class User {
+    var name: String
 
+    init(name: String) {
+        self.name = name
+    }
+}
+```
+
+## 49. What is the default access level for class fields?
+internal
+
+## 50. What is id in Objective-C?
+It is a generic type
+
+## 51. What is responder chain?
+
+The responder chain is responsible to handle all the events (like touch and motion) in iOS apps. If any responder can't handle a specific action or event, the event is sent to the next responder of the list to handle it until the list ends.
+
+(conclusion taken from here: https://www.swiftanytime.com/blog/using-responders-and-the-responder-chain-to-handle-events)
+
+## 52. What is a zombie object?
+
+It's an object, which is called after there is no more strong reference to this object.
 
 # Behavioural: 
 
