@@ -847,6 +847,10 @@ The responder chain is responsible to handle all the events (like touch and moti
 
 It's an object, which is called after there is no more strong reference to this object.
 
+## 53. What's difference between Any and AnyObject?
+
+AnyObject refers to any instance of a class, Any - refers to any instance of any type: class, struct, enum, etc.
+
 # Behavioural: 
 
 ## 1. Give me a short brief about yourself
