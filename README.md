@@ -851,6 +851,20 @@ It's an object, which is called after there is no more strong reference to this 
 
 AnyObject refers to any instance of a class, Any - refers to any instance of any type: class, struct, enum, etc.
 
+## 54. How to create generic protocol?
+
+Using associatedtype. 
+```
+protocol MyProtocol {
+    associatedtype T
+    func someFunc(_:T)
+}
+```
+## 55. How to share common files between different applications on one device?
+
+Using common App Groups for these applications.
+
+
 # Behavioural: 
 
 ## 1. Give me a short brief about yourself
