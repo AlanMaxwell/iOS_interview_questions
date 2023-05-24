@@ -796,6 +796,8 @@ Dependency Injection is an approach, when functionality of one entity depends on
 
 I would provide an example of MVVM implementation, because link to ViewModel in View is a good example of Dependency Injection.
 
+Why it's needed? To divide the functionality to different reusable parts and also to increase testability.
+
 ## 44. What's difference between @escaping and non-escaping closures?
 @escaping launches after the function ends, non-escaping - just after its call.
 
@@ -843,6 +845,12 @@ The responder chain is responsible to handle all the events (like touch and moti
 
 (conclusion taken from here: https://www.swiftanytime.com/blog/using-responders-and-the-responder-chain-to-handle-events)
 
+It starts handling this event from UIApplication and finishes at the target element.
+
+UIResponder abstract class responsible for some gesture events that we even can override.
+To pass this event to other elements in the chain, these events contain also a reference to "next" element.
+
+
 ## 52. What is a zombie object?
 
 It's an object, which is called after there is no more strong reference to this object.
@@ -864,6 +872,33 @@ protocol MyProtocol {
 
 Using common App Groups for these applications.
 
+
+## 56. What types of publishers Combine provides?
+
+* Publishers.Sequence: The Sequence publisher emits a sequence of values provided as an array or a sequence type. It's commonly used to emit a predefined set of values.
+* Publishers.Just: The Just publisher emits a single value and then finishes. It's similar to the Just publisher mentioned earlier but is a different implementation provided by the Combine framework.
+* Publishers.Future: The Future publisher represents a result or value that will be available in the future. It's useful when you want to create a publisher that produces a single value at some point in time.
+* Publishers.Timer: The Timer publisher emits a value after a specified time interval and then finishes. It's commonly used for creating time-based operations.
+
+## 57. Why extension can't contain stored properties, but can contain computed variables?
+
+Because of memory management. When you define a stored property its size calculates, but extensions developed like that so they should affect existing memory layout. Calculated variables don't affect.
+
+## 58. What are hot and cold signals in reactive programming?
+
+In reactive programming, the terms "cold" and "hot" signals refer to different ways of handling data streams.
+
+    Cold Signals - they are data streams that start producing values only when a subscriber subscribes to them. Each subscriber receives its own independent stream of values.
+
+    Better examples of cold signals include:
+        Button taps: Each time a button is tapped, a new stream of events is created, and each subscriber receives the events starting from the moment they subscribed.
+        Network requests: When making a network request, the response stream is typically cold. Each subscriber initiates its own network request and receives the response independently.
+
+    Hot Signals - they are data streams that produce values regardless of whether there are active subscribers or not. Subscribers joining a hot signal receive only the values emitted after they subscribe. Hot signals share a single stream of values among multiple subscribers.
+
+    Better examples of hot signals include:
+        Notifications: System-wide notifications that can be observed by multiple components or modules in an application. Subscribers joining the notification stream receive only the notifications emitted after they subscribe.
+        Sensor data: Continuous streams of data from sensors, such as GPS location updates or accelerometer readings, where the data is constantly being produced and can be observed by multiple parts of an application.
 
 # Behavioural: 
 
