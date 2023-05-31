@@ -484,11 +484,13 @@ It's when two different threads want to access to a shared resource, but they ar
 
 It's when two different threads write and read from a shared resource without syncronization. It leads to broked data.
 
-## 32. How to launch a group or asyncronous tasks?
+## 32. How to launch a group of asyncronous tasks?
 
 If the order doesn't matter, you can just use DispatchQueue.main.async (or DispatchQueue.global.async).
 
 If order matters you can use DispatchGroup with DispatchQueue or Operation Queue. But what to choose depends on a task specific: when you use Operation Queue you will not be notified when these tasks are done, but in DispatchGroup you will be. And if you use DispatchGroup you can't cancel tasks execution, but for Operation Queue you can.
+
+Also, using Combine you can launch several tasks using "CombineLatest"
 
 ## 33. Can a DispatchQueue task be cancelled?
 
