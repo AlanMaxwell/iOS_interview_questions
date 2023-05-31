@@ -261,6 +261,7 @@ Use this:
 
 ![ViewController lifecycle](https://github.com/AlanMaxwell/iOS_interview_questions/blob/main/viewControllerLifecycle.png)
 
+P.S.: View lifecycle in SwiftUI: Appearing, Updating, Disappearing
 
 ## // TODO: Can you say what ViewController lifecycle methods are calling when you started to segue from a view (A) to another view (B), but haven't finish it?
 
