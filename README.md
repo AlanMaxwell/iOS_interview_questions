@@ -238,7 +238,7 @@ Difference is that OCP is for similar functions, but DIP deals with the same inp
 
 The main point of Singleton is to ensure that we initialized something only once and this "something" should be available from everywhere. For example, UIApplication.shared
 
-P.S.: ServiceLocator – is a singleton with an array of some services
+P.S.: ServiceLocator – is a singleton or an injected object with an array of some services.
 
 
 ## 10. How are you doing your code reviews?
@@ -798,29 +798,35 @@ I would provide an example of MVVM implementation, because link to ViewModel in 
 
 Why it's needed? To divide the functionality to different reusable parts and also to increase testability.
 
-## 44. What's difference between @escaping and non-escaping closures?
+## 44. What three types of Dependency Injection you know?
+
+* Constructor Injection: Dependency is passed to the object via its constructor. It used when the dependent object has to use the same concrete class for its lifetime.
+* Method Injection: dependency is passed to the object via a method. It's useful if different objects could be injected. For example, if the dependency is a notification, sometimes this may sent as an SMS, and other times as an email for the same dependent object.
+* Property Injection: If the dependency is selected and invoked at different places, we can set the dependency via a property exposed by the dependent object, which can then invoke it later
+
+## 45. What's difference between @escaping and non-escaping closures?
 @escaping launches after the function ends, non-escaping - just after its call.
 
-## 45. What's difference between inout parameter of the function and a usual parameter?
+## 46. What's difference between inout parameter of the function and a usual parameter?
 
 ```
 func example(_ a: Int, _ b: inout Int) {}
 ```
 inout keyword allows to change the value of the parameter variable.
 
-## 46. In SwiftUI how to draw 1 million rows in a list?
+## 47. In SwiftUI how to draw 1 million rows in a list?
 
 1) You can use List view element
 2) ScrollView + LazyVStack views
 
 
-## 47. Do classes support multilple inheritance in Swift?
+## 48. Do classes support multilple inheritance in Swift?
 
 If to try to inherit from multiple classes, then NO. Swift classes don't support multiple inheritance.
 
 But you can inherit multiple protocols.
 
-## 48. How to prevent a class inheritance?
+## 49. How to prevent a class inheritance?
 
 Using final keyword, like:
 ```
@@ -833,13 +839,13 @@ final class User {
 }
 ```
 
-## 49. What is the default access level for class fields?
+## 50. What is the default access level for class fields?
 internal
 
-## 50. What is id in Objective-C?
+## 51. What is id in Objective-C?
 It is a generic type
 
-## 51. What is responder chain?
+## 52. What is responder chain?
 
 The responder chain is responsible to handle all the events (like touch and motion) in iOS apps. If any responder can't handle a specific action or event, the event is sent to the next responder of the list to handle it until the list ends.
 
@@ -851,15 +857,15 @@ UIResponder abstract class responsible for some gesture events that we even can 
 To pass this event to other elements in the chain, these events contain also a reference to "next" element.
 
 
-## 52. What is a zombie object?
+## 53. What is a zombie object?
 
 It's an object, which is called after there is no more strong reference to this object.
 
-## 53. What's difference between Any and AnyObject?
+## 54. What's difference between Any and AnyObject?
 
 AnyObject refers to any instance of a class, Any - refers to any instance of any type: class, struct, enum, etc.
 
-## 54. How to create generic protocol?
+## 55. How to create generic protocol?
 
 Using associatedtype. 
 ```
@@ -868,37 +874,111 @@ protocol MyProtocol {
     func someFunc(_:T)
 }
 ```
-## 55. How to share common files between different applications on one device?
+## 56. How to share common files between different applications on one device?
 
 Using common App Groups for these applications.
 
 
-## 56. What types of publishers Combine provides?
+## 57. What types of publishers Combine provides?
 
 * Publishers.Sequence: The Sequence publisher emits a sequence of values provided as an array or a sequence type. It's commonly used to emit a predefined set of values.
 * Publishers.Just: The Just publisher emits a single value and then finishes. It's similar to the Just publisher mentioned earlier but is a different implementation provided by the Combine framework.
 * Publishers.Future: The Future publisher represents a result or value that will be available in the future. It's useful when you want to create a publisher that produces a single value at some point in time.
 * Publishers.Timer: The Timer publisher emits a value after a specified time interval and then finishes. It's commonly used for creating time-based operations.
 
-## 57. Why extension can't contain stored properties, but can contain computed variables?
+## 58. Why extension can't contain stored properties, but can contain computed variables?
 
 Because of memory management. When you define a stored property its size calculates, but extensions developed like that so they should affect existing memory layout. Calculated variables don't affect.
 
-## 58. What are hot and cold signals in reactive programming?
+## 59. What are hot and cold signals in reactive programming?
 
 In reactive programming, the terms "cold" and "hot" signals refer to different ways of handling data streams.
 
-    Cold Signals - they are data streams that start producing values only when a subscriber subscribes to them. Each subscriber receives its own independent stream of values.
+   Cold Signals - they are data streams that start producing values only when a subscriber subscribes to them. Each subscriber receives its own independent stream of values.
 
-    Better examples of cold signals include:
-        Button taps: Each time a button is tapped, a new stream of events is created, and each subscriber receives the events starting from the moment they subscribed.
-        Network requests: When making a network request, the response stream is typically cold. Each subscriber initiates its own network request and receives the response independently.
+   Better examples of cold signals include:
+       Button taps: Each time a button is tapped, a new stream of events is created, and each subscriber receives the events starting from the moment they subscribed.
+       Network requests: When making a network request, the response stream is typically cold. Each subscriber initiates its own network request and receives the response independently.
 
-    Hot Signals - they are data streams that produce values regardless of whether there are active subscribers or not. Subscribers joining a hot signal receive only the values emitted after they subscribe. Hot signals share a single stream of values among multiple subscribers.
+   Hot Signals - they are data streams that produce values regardless of whether there are active subscribers or not. Subscribers joining a hot signal receive only the values emitted after they subscribe. Hot signals share a single stream of values among multiple subscribers.
 
-    Better examples of hot signals include:
-        Notifications: System-wide notifications that can be observed by multiple components or modules in an application. Subscribers joining the notification stream receive only the notifications emitted after they subscribe.
-        Sensor data: Continuous streams of data from sensors, such as GPS location updates or accelerometer readings, where the data is constantly being produced and can be observed by multiple parts of an application.
+   Better examples of hot signals include:
+       Notifications: System-wide notifications that can be observed by multiple components or modules in an application. Subscribers joining the notification stream receive only the notifications emitted after they subscribe.
+       Sensor data: Continuous streams of data from sensors, such as GPS location updates or accelerometer readings, where the data is constantly being produced and can be observed by multiple parts of an application.
+
+## 60. What SwiftUI property wrappers do you know?
+
+You can list those:
+* @State
+* @Binding
+* @ObservedObject
+* @StateObject
+* @EnvironmentObject - it is an observable object, which can be applied for several views and it affects these views simultaniously.
+
+About others - it described in further questions.
+
+## 61. What's difference between @ObservedObject and @StateObject?
+
+@ObservedObject is used to keep track of an object that has already been created and passed as a parameter from the outside.
+@StateObject is similar to @ObservedObject but it differf how SwiftUI manages their lifecycle.
+
+SwiftUI is allowed to destroy a View in every moment. In this case if we created an @ObservedObject property, then it will be destroyed and recreated too.
+@StateObject fixes that. If the View will be destroyed and recreated, then this object will REMAIN in memory and the View won’t lose the data during redrawing.
+This works for child views, for example: if your child view has @StateObject property with some data, then if the parent redraws, then StateObject will not loose its value. But if the child view has an @ObservedObject property, then when the parent will be redrawn, then the child view will be redrawn too and @ObservedObject will be created again.
+
+
+## 62. What's difference between @State and @Binding wrappers?
+
+@State is meant for simple value type properties, which can be changed within a View. If to use it with reference types then its changes will not redraw data on the View.
+@Binding is used to change properties bi-directionally. So, it can be used, for example, to change a property of a parent view from its child view.
+
+## 63. What is Bytecode?
+
+Middle code between the source code and machine code to allow to automatically compile an old application on the AppStore to new architectures.
+
+## 64. What is Runloop?
+It's an iOS system thread in which you can track states of other threads. For example, there you can make an ethernal check for some state.
+
+## 65. What is dSYM?
+It's a file with correspondence between source code and a binary of the application to make crash logs and debugging process readable.
+
+## 66. What is autoreleasepool?
+
+In Swift language it allows to not to wait until operating system cleans the memory during some actions (a loop, in a loop for example) and cleans memory as soon as possible.
+
+## 67. Methods Dispatch. What types of it you know?
+
+Static or Direct dispatch – fastest way of finding methods, because compiler knows method location from the beginning (scenario when a method hasn’t been overwritten (there is no inheritance)). So, value types have direct dispatch
+
+Dynamic or Table dispatch – happens in reference types – a method is searched in the table of function pointers (witness table) and then it’s invokes. When we create a subclass, we make a copy of this witness table. If we override some method, we override it in this table.
+It’s slower than Static, but allows inheritance
+
+Message dispatch – more dynamic than Table dispatch. It’s changing at runtime. Swizzling is an example. And methods that are inherited from NSObject classes
+
+How compiler choses the method?
+For value types it’s always static, for classes and protocols it’s static in the extension and dynamic in the initial implementation. For final classes it’s still static. Dynamic and @objc
+Keywords make it Message dispatch.
+
+## 68. What is "Hugging" and "Compression Resistance"?
+Types of Constraints.
+
+Hugging - content does not want to grow
+Compression Resistance - content does not want to shrink
+
+## 69. Semaphore vs Mutex
+
+In swift Mutex is a lock, semaphore is a DispatchSemaphore
+
+Mutex - at any point of time, only one thread can work with the entire buffer.
+Semaphore - allows the access to one resource to several threads, depending on some preset maximum.
+
+The Mutex is a locking mechanism - it blocks other threads from accessing some resource, and Semaphore is a signal mechanism which sends a signal when the resource is free and wait if it wants to access a resource.
+
+## 70. DispatchSemaphore and DispatchGroup difference.
+They are needed for different things. 
+DispatchSemaphore restricts the number of threads which can access some resource
+DispatchGroup – launches a group of tasks and waits until they end.
+
 
 # Behavioural: 
 
