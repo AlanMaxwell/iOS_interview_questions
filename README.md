@@ -44,7 +44,7 @@ a ?? 0 //5
 structs, enums, arrays, dictionaries, strings
 
 **Reference types**:
-classes, closures, NS types are all classes (NSString, for example)
+classes, closures, NS types are all classes (NSString, for example), actors
 
 Two differences between value and reference types:  
 1) Value types are stored in Stack and reference types are stored in Heap.
@@ -93,6 +93,9 @@ addressOf(array2) // 0x600002e30ac0
 array2.append(6)
 addressOf(array2) // 0x6000026119f0
 ```
+
+### How it's implemented?
+A type contains isKnownUniquelyReferenced() method, which checks if the current instance is uniquely referenced or if a copy needs to be made.
 
 ## 8. Do you know what are SOLID principles?
 
@@ -233,6 +236,10 @@ This principle is similar with OCP is more general. The DIP is an extension of t
 
 Difference is that OCP is for similar functions, but DIP deals with the same input data
 
+### 8.1 What SOLID principles Apple broke in their practice?
+
+Apple broke open-closed principle when moved to newer Swift versions and single responsibility, because viewcontroller contains presentation logic and presentation layer inside.
+
 
 ## 9. What is Singleton?
 
@@ -318,11 +325,20 @@ Any object deallocates after the counter is 0.
 
 If two objects have a strong reference to each other – retain cycle. Use weak or unowned to avoid that.
 
-(weak variables are presented as optional if to take a look on its type)
-(unowned variables are presented as usual (they can’t be nil))
-
 My advise is to watch this video from Apple:
 https://developer.apple.com/videos/play/wwdc2021/10216/
+
+Weak links also considered, but in a separate weak references counter.
+
+### 20.1 On what thread memory deallocates?
+On the main thread
+
+### 20.2 What's difference between unowned and weak
+
+Weak variables are presented as optional if to take a look on its type
+Unowned variables are presented as usual (they can’t be nil))
+
+Unowned works faster, because there is no optional chech, but it's less safer (if the object doesn't exist, we'll have a crash). So we can use it if we're sure that the object will not be nil or when performance is critical.
 
 ## 21. What is map, flatMap, compatMap, reduce. Difference between map, flatMap, compatMap
 
@@ -859,6 +875,7 @@ It starts handling this event from UIApplication and finishes at the target elem
 UIResponder abstract class responsible for some gesture events that we even can override.
 To pass this event to other elements in the chain, these events contain also a reference to "next" element.
 
+### 52. What is Hit test?
 
 ## 53. What is a zombie object?
 
@@ -868,13 +885,22 @@ It's an object, which is called after there is no more strong reference to this 
 
 AnyObject refers to any instance of a class, Any - refers to any instance of any type: class, struct, enum, etc.
 
-## 55. How to create generic protocol?
+## 55. How to implement generic protocol?
 
 Using associatedtype. 
 ```
 protocol MyProtocol {
-    associatedtype T
-    func someFunc(_:T)
+    associatedtype MyType
+    func doSomething(with value: MyType)
+}
+
+class MyClass<T>: MyProtocol {
+    typealias MyType = T
+    
+    func doSomething(with value: T) {
+        // Implementation
+        print("Doing something with \(value)")
+    }
 }
 ```
 ## 56. How to share common files between different applications on one device?
@@ -962,6 +988,12 @@ How compiler choses the method?
 For value types it’s always static, for classes and protocols it’s static in the extension and dynamic in the initial implementation. For final classes it’s still static. Dynamic and @objc
 Keywords make it Message dispatch.
 
+### If a class is not inherited, what dispatch it has?
+
+### Methods dispatch for protocols and their extensions
+For protocol id depends on type that implements it - value or reference. For extension static dispatch is used, because it calculates in compile time how much memory to allocate there.
+
+
 ## 68. What is "Hugging" and "Compression Resistance"?
 Types of Constraints.
 
@@ -982,6 +1014,15 @@ They are needed for different things.
 DispatchSemaphore restricts the number of threads which can access some resource
 DispatchGroup – launches a group of tasks and waits until they end.
 
+## 71. What is UIView, what is CALayer, who is responsible for what?
+
+## 72. What's happening if we fill a large array with values/references?
+
+If you create a very large array filled with reference types, allocating it on the stack can lead to a stack overflow, while allocating it on the heap can consume significant memory and may require proper memory management to prevent leaks
+
+## 73. What's difference between as?, as!, as?
+
+## 74. What is scene?
 
 # Behavioural: 
 
