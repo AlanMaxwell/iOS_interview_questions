@@ -876,6 +876,40 @@ UIResponder abstract class responsible for some gesture events that we even can 
 To pass this event to other elements in the chain, these events contain also a reference to "next" element.
 
 ### 52. What is Hit test?
+This method is called to determine which view should receive a touch event. By default, it returns the farthest descendant of the view hierarchy that contains a specified point.
+
+Here is an example:
+Imagine that you have two UIViews: a parent and a child. The child view is a subview of the parent view.
+Imagine that we tap the child view, but we want the parent view to be tapped instead. How to reach this behavior?
+
+You can achieve this behavior by overriding the hitTest(_:with:) method of the parent view to make the parent view receive touches that occur within the bounds of the child view:
+
+```
+
+class ParentView: UIView {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        // Check if the point is inside the bounds of the parent view
+        if self.bounds.contains(point) {
+            // Return self (parent view) as the view to receive the touch
+            return self
+        }
+        
+        // If the point is not inside the parent view, let the default behavior handle it
+        return super.hitTest(point, with: event)
+    }
+}
+
+class ChildView: UIView {
+    // Your implementation for the child view
+}
+
+// Usage
+let parentView = ParentView()
+let childView = ChildView()
+
+parentView.addSubview(childView)
+```
+Now if we tap on the child view the parent view will be tapped instead
 
 ## 53. What is a zombie object?
 
