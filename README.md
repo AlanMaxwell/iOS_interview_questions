@@ -1085,7 +1085,6 @@ Here it's better to ask about the project if they still didn't tell that, what i
 ## P.S.: Don't forget to call the interviewer by name, people like it
 
 ## A small note: if you made a mistake during your life coding then you completely failed the interview.
-Companies and trainings always tell that if you don’t know how to solve a problem or answer on a specific technical question then it doesn't mean that you failed the interview. Actually it does, but they always deny that.
-There is always another candidate who make the task without a problem, so if you will fail something - you failed. So prepare harder, practice again and again.
-
+Companies and trainings always say that if you don't know how to solve a problem or answer a specific technical question, it doesn't mean you failed the interview. Actually it does, but they always deny it.
+There is always another candidate who can handle the task without any problem, so if you fail the task, you fail the interview. So prepare harder, practice again and again.
 
