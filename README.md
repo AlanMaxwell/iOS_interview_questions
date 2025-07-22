@@ -1058,6 +1058,12 @@ If you create a very large array filled with reference types, allocating it on t
 
 ## 74. What is scene?
 
+## 75. DispatchQueue qos. Explain usage of each qos priority
+
+## 76. Design patterns. What categories you know? Provide examples of each category
+
+## 77. Result type. Provide an example
+
 # Behavioural: 
 
 ## 1. Give me a short brief about yourself
