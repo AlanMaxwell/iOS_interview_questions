@@ -478,6 +478,7 @@ struct ContentView: View {
 * Combine publisher that is sending data
 * async/await
 * Tasks - that are using with async/await
+* AsyncSequence
 * background tasks (separate mechanism that is useful when you run tasks for an application in background). It runs not so long, but sometimes it's useful if you wake up the application in background and want to do something for this period.
 
 A note: you should always update interface only on main thread (DispatchQueue.main), otherwise it can just stuck
